@@ -57,7 +57,7 @@ public class ACDCTest extends BaseTest {
 		}
 
 		// ------------------------- Generate Oracles ------------------------------
-
+		//TODO how is oracle generated?
 		// Load oracle
 		String oracleResult = assertDoesNotThrow(
 			() -> FileUtil.readFile(oracle, StandardCharsets.UTF_8));

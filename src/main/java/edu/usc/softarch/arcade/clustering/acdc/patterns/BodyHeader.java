@@ -21,7 +21,7 @@ import javax.swing.tree.TreeNode;
 	public BodyHeader(DefaultMutableTreeNode root) {
 		super(root); }
 
-	public void execute() {
+	public void execute() {//TODO whats this for?
 		List<Node> vModified = new ArrayList<>(); //will contain nodes which were moved
 		Collection<Node> vTree = allNodes(root);
 		
