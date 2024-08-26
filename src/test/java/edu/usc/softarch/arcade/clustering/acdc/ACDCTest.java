@@ -28,18 +28,19 @@ public class ACDCTest extends BaseTest {
 	 */
 	@ParameterizedTest
 	@CsvSource({
-		"struts-2.3.30",
-
-		"struts-2.5.2",
-
 		"httpd-2.3.8",
 
-		"httpd-2.4.26"
+		"httpd-2.4.26",
+
+		"struts-2.3.30",
+
+		"struts-2.5.2"
+
 	})
 	public void mainTest(String version) {
-		String deps = factsDir + fs + version + "_deps.rsf";
-		String clusters = outputDirPath + fs + version + "_mainTestResult.rsf";
-		String oracle = resourcesDir + fs + version + "_acdc_clustered.rsf";
+		String deps = factsDir + fs + version + "_deps.rsf"; //Input for arch recovery
+		String clusters = outputDirPath + fs + version + "_mainTestResult.rsf"; //output file
+		String oracle = resourcesDir + fs + version + "_acdc_clustered.rsf"; //dont know where does it come from
 
 		// Run ACDC
 		assertDoesNotThrow(() -> ACDC.run(deps, clusters));

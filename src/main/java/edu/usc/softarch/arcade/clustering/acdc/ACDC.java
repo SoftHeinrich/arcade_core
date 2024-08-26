@@ -39,6 +39,7 @@ public class ACDC {
 			throws IOException {
 		int maxClusterSize = 20; //used by SubGraph pattern
 
+		//Seems doing initialization
 		// Create a tree with a dummy root
 		Node dummy = new Node("ROOT", "Dummy");
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode(dummy);
@@ -48,21 +49,21 @@ public class ACDC {
 		// Populate the tree from the input file, initiall 2 layer
  		TAInput.readInput(inputName, root); // running slow here
 
-		Collection<Pattern> vpatterns = new ArrayList<>(); //TODO what are v patterns?
-		vpatterns.add(new BodyHeader(root));
-		vpatterns.add(new SubGraph(root,maxClusterSize));
+		Collection<Pattern> vpatterns = new ArrayList<>(); //TODO what are v patterns? maybe a wrapper for 3 patterns?
+		vpatterns.add(new BodyHeader(root)); //paper STEP 2
+		vpatterns.add(new SubGraph(root,maxClusterSize)); //TODO STEP 3-5?, why dont decouple them?
 		vpatterns.add(new OrphanAdoption(root)); //TODO what is OrphanAdoption?
 
 		// Induce all edges
 		Collection<Node> allNodes = Pattern.allNodes(root);
-		Pattern.induceEdges(allNodes);//TODO running slow here, maybe doing cluster?
+		Pattern.induceEdges(allNodes);
 
 		// Execute the patterns
  		for (Pattern p : vpatterns) //TODO what are 3 patterns?
 			p.execute();
 
 		// Take care of any objects that were not clustered
-		Pattern c = new ClusterLast(root);
+		Pattern c = new ClusterLast(root); //TODO why still any object not clustered? they should be adopted?
 		c.execute();
 
 		// Create output file

@@ -30,7 +30,7 @@ import javax.swing.tree.TreeNode;
 		for (Node ncurr : vTree) {
 			DefaultMutableTreeNode curr = ncurr.getTreeNode();
                               			
-      if (ncurr.isFile() || ncurr.getName().endsWith(".c")
+      		if (ncurr.isFile() || ncurr.getName().endsWith(".c") //TODO else then skip ncurr
 					|| ncurr.getName().endsWith(".h")) {
 				//if the current .h or .c file is not in the vector vTree, it means that its
 				//counterpart file was checked and a cluster containing has been created
