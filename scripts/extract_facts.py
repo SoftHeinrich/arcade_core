@@ -69,11 +69,11 @@ def extract_facts(system_name: str, language: str):
     project_root_name: The root name of the project, used for filtering.
   """
   system_root = f"{SUBJECT_SYSTEMS_ROOT}/{system_name}"
-  facts_dir = f"{FACTS_ROOT}/{system_name}"
+  facts_dir = f"{FACTS_ROOT}/{system_name}-test"
   time_print(f"Creating Facts directory at {facts_dir}.")
   os.makedirs(facts_dir, exist_ok=True)
   time_print(f"Creating Understand dependencies directory at {system_root}/deps.")
-  os.makedirs(f"{system_root}/deps", exist_ok=True)
+  os.makedirs(f"{system_root}/deps-test", exist_ok=True)
   print()
 
   # Parse system Understand dependencies
@@ -93,7 +93,7 @@ def extract_facts(system_name: str, language: str):
 
   # Mallet
   artifacts_output_path = f"{FACTS_ROOT}/{system_name}/artifacts"
-  os.makedirs(artifacts_output_path, exist_ok=True)
+  os.makedirs(artifacts_output_path)
   run_mallet(system_root, language, artifacts_output_path)
   gen_doc_topics(system_name, artifacts_output_path)
   time_print("All facts extracted.")
