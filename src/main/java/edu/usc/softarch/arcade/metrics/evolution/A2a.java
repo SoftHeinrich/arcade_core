@@ -40,7 +40,7 @@ public class A2a {
 	}
 
 	public static CentralTendency runBatch(String path) throws IOException {
-		return runBatch(path, false);
+		return runBatch(path, true);
 	}
 
 	public static CentralTendency runBatch(String path, boolean verbose)
@@ -94,25 +94,27 @@ public class A2a {
 
 	//region PROCESSING
 	private int numerator() {
+		// balance the number of clusters in the source and target architectures
 		int numClusterDifference =
 			Math.abs(this.sourceClusters.size() - this.targetClusters.size());
 
+		// remove and add entities to the source and target architectures
 		EnhancedSet<String> sourceEntities = sourceClusters.getEntities();
 		EnhancedSet<String> targetEntities = targetClusters.getEntities();
 
 		Set<String> addedEntities = targetEntities.difference(sourceEntities);
 		Set<String> removedEntities = sourceEntities.difference(targetEntities);
 
-		// MCFP is calculated only over the entities shared between both versions.
+		// MCFP is calculated only over the entities shared between both versions. TODO: what is MCFP?
 		// Entities which were added or removed between versions are considered
 		// separately by doubling their quantities (once for add/remove, once for
 		// move).
-		ReadOnlyArchitecture sourceTrimmed =
+		ReadOnlyArchitecture sourceTrimmed = //src arch - removed entities == entities remaining
 			sourceClusters.difference(removedEntities);
 		ReadOnlyArchitecture targetTrimmed =
-			targetClusters.difference(addedEntities);
+			targetClusters.difference(addedEntities); // tgt arch - added entities == entities remaining from src
 
-		McfpDriver mcfpDriver = new McfpDriver(sourceTrimmed, targetTrimmed);
+		McfpDriver mcfpDriver = new McfpDriver(sourceTrimmed, targetTrimmed); // doing the hungarian matching
 
 		int numAddedEntities = addedEntities.size();
 		int numRemovedEntities = removedEntities.size();
@@ -121,8 +123,8 @@ public class A2a {
 		int numMovedEntities = mcfpDriver.getCost() / 2;
 
 		return numClusterDifference + 2 * numAddedEntities
-			+ 2 * numRemovedEntities + numMovedEntities;
-	}
+			+ 2 * numRemovedEntities + numMovedEntities; //TODO calculation might be wrong, as added and moved entities are counted twice
+	}  //TODO need to check whether for the given example struts, the entities are the same
 
 	private double denominator() {
 		int numSourceClusters = this.sourceClusters.size();
@@ -135,8 +137,11 @@ public class A2a {
 	}
 
 	public double solve() {
-		if (this.a2a == -1)
-			this.a2a = (1 - numerator() / denominator()) * 100;
+		if (this.a2a == -1) {
+			int numerator_val = numerator();
+			double denominator_val =  denominator();
+			this.a2a = (1 - numerator_val / denominator_val) * 100;
+		}
 		return this.a2a;
 	}
 	//endregion

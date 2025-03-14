@@ -20,7 +20,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class A2aTest extends BaseTest {
-	private final String resourcesDir = resourcesBase + fs + "SystemEvo";
+  private final String resourcesDir = resourcesBase + fs + "SystemEvo";
   private final String outputDirPath = outputBase + fs + "SystemEvoTest";
 
   @BeforeEach

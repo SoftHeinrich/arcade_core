@@ -12,7 +12,7 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
 		<!-- CHANGE THIS LINE TO CHANGE MAIN CLASS -->
-		<mainclass>edu.usc.softarch.arcade.util.ldasupport.PipeExtractor</mainclass>
+		<mainclass>edu.usc.softarch.arcade.clustering.Clusterer.java</mainclass>
 		<!-- CHANGE THIS LINE TO CHANGE MAIN CLASS -->
   </properties>
   <dependencies>

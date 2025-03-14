@@ -28,6 +28,8 @@ public class ACDCTest extends BaseTest {
 	 */
 	@ParameterizedTest
 	@CsvSource({
+//		"httpd-2.3.8re",
+		"opencv-2.2",
 		"httpd-2.3.8",
 
 		"httpd-2.4.26",

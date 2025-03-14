@@ -49,7 +49,7 @@ public class RenameFixer {
 		Set<String> unmatched1 = sourceEntities.difference(commonEntities);
 		Set<String> unmatched2 = targetEntities.difference(commonEntities);
 		Map<String, ReadOnlyCluster> ra1EntityLocations =
-			ra1.getEntityLocationMap();
+			ra1.getEntityLocationMap(); //TODO what is this?
 		Map<String, ReadOnlyCluster> ra2EntityLocations =
 			ra2.getEntityLocationMap();
 
